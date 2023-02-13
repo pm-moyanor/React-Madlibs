@@ -1,4 +1,4 @@
-import { CLIENT_STATIC_FILES_RUNTIME_POLYFILLS } from "next/dist/shared/lib/constants";
+
 import react, { useEffect, useState } from "react";
 import data from "./data";
 import stories from "./data";
@@ -33,9 +33,11 @@ export default function Story({story,title}){
 //}
 
 // TODO
-// with data collected from user, choose a random data element and place the values in the correspondent blanks
-// the inputs shoud appear in form, acording with the blanks in the story selected
-//should have button to reset story
+//optimize the code,
+//separate in components
+//add css 
+//fill blaks as you type
+//further, inputs that change depending on the template loaded
 
 
 // {

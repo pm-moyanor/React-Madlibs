@@ -10,33 +10,25 @@ export default function Form() {
   const [story, setStory] = useState("");
   const [title, setTitle] = useState("");
   const random = Math.floor(Math.random() * stories.length);
- 
 
   function loadStory() {
     setStory(stories[random].template);
     setTitle(stories[random].title);
-    console.log(story,title)
-  }
-  function startGame(){
-    setName("");
-    setAnimal("");
-    setAdj("");
-    setVerb("");
+    console.log(story, title);
   }
 
   useEffect(() => {
     loadStory();
   }, []);
 
-
-
   const handleClick = (e) => {
     e.preventDefault();
-    
-   
-    replaceBlanks(title,story, name, animal, adj, verb);
-   
-   // startGame()
+
+    replaceBlanks(title, story, name, animal, adj, verb);
+    setName("");
+    setAnimal("");
+    setAdj("");
+    setVerb("");
   };
 
   //   let replacementObj = {
@@ -100,11 +92,12 @@ export default function Form() {
           <button onClick={handleClick}>get story</button>
         </form>
       </div>
-       {story.includes('[') === false && <Story story={story} title={title} />}
-        <button onClick={handleNewRound}>restart</button>
-        
-    
-
+      {story.includes("[") === false && (
+        <>
+          <Story story={story} title={title} />
+          <button onClick={handleNewRound}>restart</button>
+        </>
+      )}
     </>
   );
 }
