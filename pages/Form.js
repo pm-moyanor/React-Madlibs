@@ -10,49 +10,64 @@ export default function Form() {
   const [story, setStory] = useState("");
   const [title, setTitle] = useState("");
   const random = Math.floor(Math.random() * stories.length);
-  let newStory = "";
+ 
 
   function loadStory() {
     setStory(stories[random].template);
     setTitle(stories[random].title);
+    console.log(story,title)
+  }
+  function startGame(){
+    setName("");
+    setAnimal("");
+    setAdj("");
+    setVerb("");
   }
 
   useEffect(() => {
     loadStory();
   }, []);
 
-  console.log(typeof story);
+
 
   const handleClick = (e) => {
     e.preventDefault();
-    replaceBlanks(story, name,animal,adj,verb);
-    setName('')
-    setAnimal('')
-    setAdj('')
-    setVerb('')
+    
+   
+    replaceBlanks(title,story, name, animal, adj, verb);
+   
+   // startGame()
   };
 
-//   let replacementObj = {
-//     wild: name,
-//     "[Animal]": animal,
-//     "[Adjective]": adj,
-//     "[Verbing]": verb,
-//   };
+  //   let replacementObj = {
+  //     wild: name,
+  //     "[Animal]": animal,
+  //     "[Adjective]": adj,
+  //     "[Verbing]": verb,
+  //   };
 
-  function replaceBlanks(string, name, animal, adj, verb) {
-  let newStory =   string
+  function replaceBlanks(title, string, name, animal, adj, verb) {
+    let newStory = string
       .replaceAll("[Name]", name)
       .replaceAll("[Animal]", animal)
       .replaceAll("[Adjective]", adj)
       .replaceAll("[Verbing]", verb);
-
-setStory(newStory)
-     
+    let newTitle = title
+      .replaceAll("[Name]", name)
+      .replaceAll("[Animal]", animal)
+      .replaceAll("[Adjective]", adj)
+      .replaceAll("[Verbing]", verb);
+    setStory(newStory);
+    setTitle(newTitle);
   }
 
-  // const handleChange(){
-
-  // }
+  function handleNewRound() {
+    setName("");
+    setAnimal("");
+    setAdj("");
+    setVerb("");
+    loadStory();
+  }
 
   return (
     <>
@@ -85,7 +100,10 @@ setStory(newStory)
           <button onClick={handleClick}>get story</button>
         </form>
       </div>
-      <Story story={story} title={title}/>
+       {story.includes('[') === false && <Story story={story} title={title} />}
+        <button onClick={handleNewRound}>restart</button>
+        
+    
 
     </>
   );

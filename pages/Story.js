@@ -1,3 +1,4 @@
+import { CLIENT_STATIC_FILES_RUNTIME_POLYFILLS } from "next/dist/shared/lib/constants";
 import react, { useEffect, useState } from "react";
 import data from "./data";
 import stories from "./data";
@@ -19,7 +20,7 @@ export default function Story({story,title}){
 //     loadStory()
 // })
 
-
+//if(story.inludes('[Name]') === false){
     return(
         <div className="story-box">
             <h3>{title}</h3>
@@ -27,6 +28,9 @@ export default function Story({story,title}){
         </div>
     )
 }
+
+ 
+//}
 
 // TODO
 // with data collected from user, choose a random data element and place the values in the correspondent blanks
