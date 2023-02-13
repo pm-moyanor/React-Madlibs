@@ -1,38 +1,92 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
+import Story from "./Story";
+import stories from "./data";
 
+export default function Form() {
+  const [name, setName] = useState("");
+  const [animal, setAnimal] = useState("");
+  const [adj, setAdj] = useState("");
+  const [verb, setVerb] = useState("");
+  const [story, setStory] = useState("");
+  const [title, setTitle] = useState("");
+  const random = Math.floor(Math.random() * stories.length);
+  let newStory = "";
 
-export default function Form(){
-    const[noun1,setNoun1] = useState('')
-    const[noun2,setNoun2] = useState('')
-    const[adj,setAdj] = useState('')
-    const[color,setColor] = useState('')
-    const [frase,setFrase] = useState('')
+  function loadStory() {
+    setStory(stories[random].template);
+    setTitle(stories[random].title);
+  }
 
-    const handleClick=(e)=>{
-        e.preventDefault()
-        setFrase(`the ${noun1} and ${adj} ${noun2} are ${color}`)
-       
-        console.log(noun1,noun2,adj,color)
-        
-    }
+  useEffect(() => {
+    loadStory();
+  }, []);
 
-    // const handleChange(){
-        
-    // }
+  console.log(typeof story);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    replaceBlanks(story, name,animal,adj,verb);
+    setName('')
+    setAnimal('')
+    setAdj('')
+    setVerb('')
+  };
 
-    return(
-        <>
-        <div className="form-box">
-<form className="form">
-    <input type="text" placeholder="noun 1" value={noun1} onChange={(e)=>setNoun1(e.target.value)}  ></input>
-    <input type="text" placeholder="noun 2" value={noun2} onChange={(e)=>setNoun2(e.target.value)}></input>
-    <input type="text" placeholder="adjective" value={adj} onChange={(e)=>setAdj(e.target.value)}></input>
-    <input type="text" placeholder="color" value={color} onChange={(e)=>setColor(e.target.value)}></input>
-    <button onClick={handleClick}>get story</button>
-</form>
-        </div>
-        <h2>{frase}</h2>
-        </>
-    )
+//   let replacementObj = {
+//     wild: name,
+//     "[Animal]": animal,
+//     "[Adjective]": adj,
+//     "[Verbing]": verb,
+//   };
+
+  function replaceBlanks(string, name, animal, adj, verb) {
+  let newStory =   string
+      .replaceAll("[Name]", name)
+      .replaceAll("[Animal]", animal)
+      .replaceAll("[Adjective]", adj)
+      .replaceAll("[Verbing]", verb);
+
+setStory(newStory)
+     
+  }
+
+  // const handleChange(){
+
+  // }
+
+  return (
+    <>
+      <div className="form-box">
+        <form className="form">
+          <input
+            type="text"
+            placeholder="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="animal"
+            value={animal}
+            onChange={(e) => setAnimal(e.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="adjective"
+            value={adj}
+            onChange={(e) => setAdj(e.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="verb"
+            value={verb}
+            onChange={(e) => setVerb(e.target.value)}
+          ></input>
+          <button onClick={handleClick}>get story</button>
+        </form>
+      </div>
+      <Story story={story} title={title}/>
+
+    </>
+  );
 }

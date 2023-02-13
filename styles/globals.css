@@ -4,11 +4,7 @@ body{
   justify-content: center;
 }
 
-h2{
-  color: white;
-  text-align: center;
-}
-h3{
+h2,h3,p{
   color: white;
   text-align: center;
 }

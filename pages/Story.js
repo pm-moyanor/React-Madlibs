@@ -1,13 +1,38 @@
-import react from "react";
+import react, { useEffect, useState } from "react";
+import data from "./data";
+import stories from "./data";
 
-export default function Story(){
+
+export default function Story({story,title}){
+
+//     console.log(stories)
+// const [story,setStory] = useState('')
+// const random = Math.floor(Math.random() * stories.length )
+// console.log(random)
+
+// useEffect(()=>{
+//    function loadStory(){
+
+//     setStory(stories[random])
+//     console.log(story)
+//     }
+//     loadStory()
+// })
+
+
     return(
         <div className="story-box">
-            <h3>Title</h3>
-            <h3>loading..</h3>
+            <h3>{title}</h3>
+            <p>{story}</p>
         </div>
     )
 }
+
+// TODO
+// with data collected from user, choose a random data element and place the values in the correspondent blanks
+// the inputs shoud appear in form, acording with the blanks in the story selected
+//should have button to reset story
+
 
 // {
 //     title: "Camping Trip",
