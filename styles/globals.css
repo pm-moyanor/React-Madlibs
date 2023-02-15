@@ -1,31 +1,50 @@
 body {
-  background:rgb(75, 145, 73);
-  font-family: "Montserrat", sans-serif;
+  background-color: rgb(255, 255, 255);
+  font-family: 'Outfit', sans-serif;
   margin: 0;
   color: white;
-  text-align: center;
+
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.main-container{
+.main-container {
+
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
+  /* background-image: url("/magazine-word-background-13459139.jpg");
+  background-size: contain; */
+  background-repeat: repeat-x;
+  /* box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
+  -webkit-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
+  -moz-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46); */
+  position: relative;
+  height: 200;
+  width: 100vh;
 }
 
-
-
-.main-title{
-  font-size: 46px;
+.main-title {
+  color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 80px;
+  display: flex;
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 100vh;
   font-weight: 100;
-  height: 100px;
-text-align: center;
-padding-top: 50px;
-  font-family: 'Asset', cursive;
+  height: 200px;
+  text-align: center;
+  margin: 0;
+  font-family: "Luckiest Guy", cursive;
+
+  
 }
+
+
 
 h3,
 p {
@@ -34,18 +53,36 @@ p {
 }
 
 .form-box {
-  color: rgb(75, 145, 73);
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  display: flex;
+ height: 300px;
+  justify-content: left;
+  flex-direction: column;
   padding: 20px;
+  box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
+  -webkit-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
+  -moz-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
   width: 600px;
-  background-color: #fcb900;
+ 
+  margin: 60px;
+ 
 }
 
+.input-group{
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 input {
-  width: 80%;
+ 
+  width: 300px;
   background: transparent;
   border: 0;
   border-bottom: 1px solid;
-  padding: 1em 0 0.8em;
+  padding: 1em 1em 0.8em;
   text-align: center;
   font-size: 20px;
   font-family: inherit;
@@ -57,21 +94,54 @@ input {
 
 .form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  justify-content:space-around;
+  align-items:center;
+ 
 }
 
-button {
+.restart-btn {
   all: unset;
-  color: white;
+  color: rgb(255, 255, 255);
   margin-top: 2.4em;
-  background: rgba(145, 131, 105, 0.525);
-
+  background: none; 
+  border: 1px solid white;
+  font-size: 16px;
   padding: 1em 4em;
   border-radius: 50px;
   cursor: pointer;
   display: inline-block;
-  font-weight: 700;
+  font-weight: 550;
   position: relative;
+}
+
+.get-btn{
+ 
+  color: rgb(255, 255, 255);
+  border: none;
+  margin-top: 2.4em;
+  background: rgb(0, 0, 0);
+  font-size: 16px;
+  padding: 1em 4em;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 550;
+  position: relative;
+
+}
+
+.story-box {
+  width: 560px;
+  color:black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  padding: 40px;
+  background-color: #1349c8;
+  margin: 20px;
+  border-radius: 5px;
+  box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.36);
+  -webkit-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.36);
+  -moz-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.36);
 }

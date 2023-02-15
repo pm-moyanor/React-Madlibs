@@ -4,27 +4,16 @@ import data from "./data";
 import stories from "./data";
 
 
-export default function Story({story,title}){
+export default function Story({story,title,handleNewRound}){
+console.log(story,title)
 
-//     console.log(stories)
-// const [story,setStory] = useState('')
-// const random = Math.floor(Math.random() * stories.length )
-// console.log(random)
 
-// useEffect(()=>{
-//    function loadStory(){
-
-//     setStory(stories[random])
-//     console.log(story)
-//     }
-//     loadStory()
-// })
-
-//if(story.inludes('[Name]') === false){
     return(
+        
         <div className="story-box">
-            <h3>{title}</h3>
+            <h3>{ title.toUpperCase()}</h3>
             <p>{story}</p>
+            <button onClick={handleNewRound} className="restart-btn">restart</button> 
         </div>
     )
 }

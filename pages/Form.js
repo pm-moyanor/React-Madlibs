@@ -62,9 +62,10 @@ export default function Form() {
   }
 
   return (
-    <>
+    <div className="main-container">
       <div className="form-box">
         <form className="form">
+            <div className="input-group">
           <input
             type="text"
             placeholder="name"
@@ -89,15 +90,14 @@ export default function Form() {
             value={verb}
             onChange={(e) => setVerb(e.target.value)}
           ></input>
-          <button onClick={handleClick}>get story</button>
+          </div>
+          <button onClick={handleClick} className="get-btn" >get story</button>
         </form>
       </div>
+       
       {story.includes("[") === false && (
-        <>
-          <Story story={story} title={title} />
-          <button onClick={handleNewRound}>restart</button>
-        </>
+        <Story story={story} title={title} handleNewRound={handleNewRound} />
       )}
-    </>
+    </div>
   );
 }
