@@ -10,18 +10,19 @@ export default function Form() {
   const [story, setStory] = useState("");
   const [title, setTitle] = useState("");
  
-  
+  //grab one random story from data and set title and story
   function loadStory() {
     const random = Math.floor(Math.random() * stories.length);
     setStory(stories[random].template);
     setTitle(stories[random].title);
    
   }
-
+//load on mount(select the story)
   useEffect(() => {
     loadStory();
   }, []);
 
+  //on submitting with click replace the templates with the input values and empty inputs
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -39,6 +40,7 @@ export default function Form() {
   //     "[Verbing]": verb,
   //   };
 
+  // replacing all the values(refactor with cleaner function? ) and set new ones in state
   function replaceBlanks( name, animal, adj, verb) {
     let newStory = story
       .replaceAll("[Name]", name)
@@ -53,7 +55,7 @@ export default function Form() {
     setStory(newStory);
     setTitle(newTitle);
   }
-
+//reset game
   function handleNewRound() {
     setName("");
     setAnimal("");
@@ -95,8 +97,9 @@ export default function Form() {
           <button onClick={handleClick} className="get-btn" >get story</button>
         </form>
       </div>
+
        
-       {story.includes("[") === false &&  
+       {story.includes("[") === false &&  // only if the blanks are replaced by input values, render
         <Story story={story} title={title} handleNewRound={handleNewRound} />}
       
     </div>

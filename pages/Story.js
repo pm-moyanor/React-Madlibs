@@ -8,21 +8,23 @@ export default function Story({ story = "", title = "", handleNewRound })  {
       <h3>{title.toUpperCase()}</h3>
       <p>{story}</p>
       <button onClick={handleNewRound} className="restart-btn">
-        restart
+        play again
       </button>
     </div>
   );
 }
 
-//}
+
 
 // TODO
 //optimize the code,
-//separate in components
+//separate in components?
 //add css
-//fill blaks as you type
+
 //further, inputs that change depending on the template loaded
 
+
+//-----------------template sample--------------
 // {
 //     title: "Camping Trip",
 //     template:
