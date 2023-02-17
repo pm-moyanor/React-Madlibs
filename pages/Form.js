@@ -37,13 +37,6 @@ export default function Form() {
     setFormData(emtpyFormValues);
   };
 
-  //   let replacementObj = {
-  //     wild: name,
-  //     "[Animal]": animal,
-  //     "[Adjective]": adj,
-  //     "[Verbing]": verb,
-  //   };
-
   // replacing all the values(refactor with cleaner function? ) and set new ones in state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +46,7 @@ export default function Form() {
   //reset game
   function handleNewRound() {
     setFormData(emtpyFormValues);
+    setStory(emptyStory);
   }
 
   return (
