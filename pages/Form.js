@@ -9,12 +9,13 @@ export default function Form() {
   const [verb, setVerb] = useState("");
   const [story, setStory] = useState("");
   const [title, setTitle] = useState("");
-  const random = Math.floor(Math.random() * stories.length);
-
+ 
+  
   function loadStory() {
+    const random = Math.floor(Math.random() * stories.length);
     setStory(stories[random].template);
     setTitle(stories[random].title);
-    console.log(story, title);
+   
   }
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Form() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    replaceBlanks(title, story, name, animal, adj, verb);
+    replaceBlanks( name, animal, adj, verb);
     setName("");
     setAnimal("");
     setAdj("");
@@ -38,8 +39,8 @@ export default function Form() {
   //     "[Verbing]": verb,
   //   };
 
-  function replaceBlanks(title, string, name, animal, adj, verb) {
-    let newStory = string
+  function replaceBlanks( name, animal, adj, verb) {
+    let newStory = story
       .replaceAll("[Name]", name)
       .replaceAll("[Animal]", animal)
       .replaceAll("[Adjective]", adj)
@@ -95,9 +96,9 @@ export default function Form() {
         </form>
       </div>
        
-      {story.includes("[") === false && (
-        <Story story={story} title={title} handleNewRound={handleNewRound} />
-      )}
+       {story.includes("[") === false &&  
+        <Story story={story} title={title} handleNewRound={handleNewRound} />}
+      
     </div>
   );
 }

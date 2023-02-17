@@ -1,33 +1,27 @@
-
 import react, { useEffect, useState } from "react";
 import data from "./data";
 import stories from "./data";
 
-
-export default function Story({story,title,handleNewRound}){
-console.log(story,title)
-
-
-    return(
-        
-        <div className="story-box">
-            <h3>{ title.toUpperCase()}</h3>
-            <p>{story}</p>
-            <button onClick={handleNewRound} className="restart-btn">restart</button> 
-        </div>
-    )
+export default function Story({ story = "", title = "", handleNewRound })  {
+  return (
+    <div className="story-box">
+      <h3>{title.toUpperCase()}</h3>
+      <p>{story}</p>
+      <button onClick={handleNewRound} className="restart-btn">
+        restart
+      </button>
+    </div>
+  );
 }
 
- 
 //}
 
 // TODO
 //optimize the code,
 //separate in components
-//add css 
+//add css
 //fill blaks as you type
 //further, inputs that change depending on the template loaded
-
 
 // {
 //     title: "Camping Trip",
