@@ -1,107 +1,103 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Story from "./Story";
 import stories from "./data";
+import { replaceBlanks } from "../utils/utils";
 
 export default function Form() {
-  const [name, setName] = useState("");
-  const [animal, setAnimal] = useState("");
-  const [adj, setAdj] = useState("");
-  const [verb, setVerb] = useState("");
-  const [story, setStory] = useState("");
-  const [title, setTitle] = useState("");
- 
+  const emtpyFormValues = {
+    name: "",
+    animal: "",
+    adjective: "",
+    verb: "",
+  };
+  const emptyStory = { story: "", title: "" };
+
+  //Form States
+  const [formData, setFormData] = useState(emtpyFormValues);
+  const [story, setStory] = useState(emptyStory);
+
   //grab one random story from data and set title and story
   function loadStory() {
     const random = Math.floor(Math.random() * stories.length);
-    setStory(stories[random].template);
-    setTitle(stories[random].title);
-   
+    setStory({ story: stories[random].template, title: stories[random].title });
   }
-//load on mount(select the story)
+  //load on mount(select the story)
   useEffect(() => {
     loadStory();
   }, []);
 
   //on submitting with click replace the templates with the input values and empty inputs
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    replaceBlanks( name, animal, adj, verb);
-    setName("");
-    setAnimal("");
-    setAdj("");
-    setVerb("");
+    for (let input of Object.values(formData)) {
+      if (input === "") {
+        alert("Please fill out all fields");
+        return;
+      }
+    }
+    replaceBlanks(formData, story, setStory);
+    setFormData(emtpyFormValues);
   };
 
-  //   let replacementObj = {
-  //     wild: name,
-  //     "[Animal]": animal,
-  //     "[Adjective]": adj,
-  //     "[Verbing]": verb,
-  //   };
-
   // replacing all the values(refactor with cleaner function? ) and set new ones in state
-  function replaceBlanks( name, animal, adj, verb) {
-    let newStory = story
-      .replaceAll("[Name]", name)
-      .replaceAll("[Animal]", animal)
-      .replaceAll("[Adjective]", adj)
-      .replaceAll("[Verbing]", verb);
-    let newTitle = title
-      .replaceAll("[Name]", name)
-      .replaceAll("[Animal]", animal)
-      .replaceAll("[Adjective]", adj)
-      .replaceAll("[Verbing]", verb);
-    setStory(newStory);
-    setTitle(newTitle);
-  }
-//reset game
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((fData) => ({ ...fData, [name]: value }));
+  };
+
+  //reset game
   function handleNewRound() {
-    setName("");
-    setAnimal("");
-    setAdj("");
-    setVerb("");
-    loadStory();
+    setStory(emptyStory);
   }
 
   return (
     <div className="main-container">
       <div className="form-box">
         <form className="form">
-            <div className="input-group">
-          <input
-            type="text"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="animal"
-            value={animal}
-            onChange={(e) => setAnimal(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="adjective"
-            value={adj}
-            onChange={(e) => setAdj(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="verb"
-            value={verb}
-            onChange={(e) => setVerb(e.target.value)}
-          ></input>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="name"
+              value={formData.name}
+              onChange={handleChange}
+              name="name"
+            ></input>
+            <input
+              type="text"
+              placeholder="animal"
+              value={formData.animal}
+              onChange={handleChange}
+              name="animal"
+            ></input>
+            <input
+              type="text"
+              placeholder="adjective"
+              value={formData.adjective}
+              onChange={handleChange}
+              name="adjective"
+            ></input>
+            <input
+              type="text"
+              placeholder="verb"
+              value={formData.verb}
+              onChange={handleChange}
+              name="verb"
+            ></input>
           </div>
-          <button onClick={handleClick} className="get-btn" >get story</button>
+          <button onClick={handleSubmit} className="get-btn">
+            get story
+          </button>
         </form>
       </div>
 
-       
-       {story.includes("[") === false &&  // only if the blanks are replaced by input values, render
-        <Story story={story} title={title} handleNewRound={handleNewRound} />}
-      
+      {story.story &&
+        story.story.includes("[") === false && ( // only if the blanks are replaced by input values, render
+          <Story
+            story={story.story}
+            title={story.title}
+            handleNewRound={handleNewRound}
+          />
+        )}
     </div>
   );
 }
