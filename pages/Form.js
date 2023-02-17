@@ -3,21 +3,27 @@ import Story from "./Story";
 import stories from "./data";
 
 export default function Form() {
-  const [name, setName] = useState("");
+  const emtpyFormValues = {
+    name: "",
+    animal: "",
+    adjective: "",
+    verb: "",
+  };
+  const [formData, setFormData] = useState(emtpyFormValues);
+  /*   const [name, setName] = useState("");
   const [animal, setAnimal] = useState("");
   const [adj, setAdj] = useState("");
-  const [verb, setVerb] = useState("");
+  const [verb, setVerb] = useState(""); */
   const [story, setStory] = useState("");
   const [title, setTitle] = useState("");
- 
+
   //grab one random story from data and set title and story
   function loadStory() {
     const random = Math.floor(Math.random() * stories.length);
     setStory(stories[random].template);
     setTitle(stories[random].title);
-   
   }
-//load on mount(select the story)
+  //load on mount(select the story)
   useEffect(() => {
     loadStory();
   }, []);
@@ -25,8 +31,7 @@ export default function Form() {
   //on submitting with click replace the templates with the input values and empty inputs
   const handleClick = (e) => {
     e.preventDefault();
-
-    replaceBlanks( name, animal, adj, verb);
+    replaceBlanks(formData);
     setName("");
     setAnimal("");
     setAdj("");
@@ -41,7 +46,7 @@ export default function Form() {
   //   };
 
   // replacing all the values(refactor with cleaner function? ) and set new ones in state
-  function replaceBlanks( name, animal, adj, verb) {
+  function replaceBlanks({ name, animal, adj, verb }) {
     let newStory = story
       .replaceAll("[Name]", name)
       .replaceAll("[Animal]", animal)
@@ -55,53 +60,61 @@ export default function Form() {
     setStory(newStory);
     setTitle(newTitle);
   }
-//reset game
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name);
+    console.log(name, value);
+    setFormData((fData) => ({ ...fData, [name]: value }));
+  };
+
+  //reset game
   function handleNewRound() {
-    setName("");
-    setAnimal("");
-    setAdj("");
-    setVerb("");
-    loadStory();
+    setFormData(emtpyFormValues);
   }
 
   return (
     <div className="main-container">
       <div className="form-box">
         <form className="form">
-            <div className="input-group">
-          <input
-            type="text"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="animal"
-            value={animal}
-            onChange={(e) => setAnimal(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="adjective"
-            value={adj}
-            onChange={(e) => setAdj(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="verb"
-            value={verb}
-            onChange={(e) => setVerb(e.target.value)}
-          ></input>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="name"
+              value={formData.name}
+              onChange={handleChange}
+              name="name"
+            ></input>
+            <input
+              type="text"
+              placeholder="animal"
+              value={formData.animal}
+              onChange={handleChange}
+              name="animal"
+            ></input>
+            <input
+              type="text"
+              placeholder="adjective"
+              value={formData.adjective}
+              onChange={handleChange}
+              name="adjective"
+            ></input>
+            <input
+              type="text"
+              placeholder="verb"
+              value={formData.verb}
+              onChange={handleChange}
+              name="verb"
+            ></input>
           </div>
-          <button onClick={handleClick} className="get-btn" >get story</button>
+          <button onClick={handleClick} className="get-btn">
+            get story
+          </button>
         </form>
       </div>
 
-       
-       {story.includes("[") === false &&  // only if the blanks are replaced by input values, render
-        <Story story={story} title={title} handleNewRound={handleNewRound} />}
-      
+      {story.includes("[") === false && ( // only if the blanks are replaced by input values, render
+        <Story story={story} title={title} handleNewRound={handleNewRound} />
+      )}
     </div>
   );
 }
