@@ -11,6 +11,8 @@ export default function Form() {
     verb: "",
   };
   const emptyStory = { story: "", title: "" };
+
+  //Form States
   const [formData, setFormData] = useState(emtpyFormValues);
   const [story, setStory] = useState(emptyStory);
 
@@ -45,7 +47,6 @@ export default function Form() {
 
   //reset game
   function handleNewRound() {
-    setFormData(emtpyFormValues);
     setStory(emptyStory);
   }
 
