@@ -25,8 +25,14 @@ export default function Form() {
   }, []);
 
   //on submitting with click replace the templates with the input values and empty inputs
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    for (let input of Object.values(formData)) {
+      if (input === "") {
+        alert("Please fill out all fields");
+        return;
+      }
+    }
     replaceBlanks(formData, story, setStory);
     setFormData(emtpyFormValues);
   };
@@ -83,19 +89,20 @@ export default function Form() {
               name="verb"
             ></input>
           </div>
-          <button onClick={handleClick} className="get-btn">
+          <button onClick={handleSubmit} className="get-btn">
             get story
           </button>
         </form>
       </div>
 
-      {story.story.includes("[") === false && ( // only if the blanks are replaced by input values, render
-        <Story
-          story={story.story}
-          title={story.title}
-          handleNewRound={handleNewRound}
-        />
-      )}
+      {story.story &&
+        story.story.includes("[") === false && ( // only if the blanks are replaced by input values, render
+          <Story
+            story={story.story}
+            title={story.title}
+            handleNewRound={handleNewRound}
+          />
+        )}
     </div>
   );
 }
