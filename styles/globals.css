@@ -64,7 +64,7 @@ p {
   -webkit-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
   -moz-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
   width: 600px;
- 
+ background-color: #d9f55e;
   margin: 60px;
  
 }
@@ -118,9 +118,9 @@ input {
 .get-btn{
  
   color: rgb(255, 255, 255);
-  border: none;
+ border: rgb(0, 0, 0) 0.5px solid;
   margin-top: 2.4em;
-  background: rgb(0, 0, 0);
+  background: rgb(93, 94, 75);
   font-size: 16px;
   padding: 1em 4em;
   border-radius: 50px;
