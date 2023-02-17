@@ -1,6 +1,7 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Story from "./Story";
 import stories from "./data";
+import { replaceBlanks } from "../utils/utils";
 
 export default function Form() {
   const emtpyFormValues = {
@@ -9,19 +10,14 @@ export default function Form() {
     adjective: "",
     verb: "",
   };
+  const emptyStory = { story: "", title: "" };
   const [formData, setFormData] = useState(emtpyFormValues);
-  /*   const [name, setName] = useState("");
-  const [animal, setAnimal] = useState("");
-  const [adj, setAdj] = useState("");
-  const [verb, setVerb] = useState(""); */
-  const [story, setStory] = useState("");
-  const [title, setTitle] = useState("");
+  const [story, setStory] = useState(emptyStory);
 
   //grab one random story from data and set title and story
   function loadStory() {
     const random = Math.floor(Math.random() * stories.length);
-    setStory(stories[random].template);
-    setTitle(stories[random].title);
+    setStory({ story: stories[random].template, title: stories[random].title });
   }
   //load on mount(select the story)
   useEffect(() => {
@@ -31,11 +27,8 @@ export default function Form() {
   //on submitting with click replace the templates with the input values and empty inputs
   const handleClick = (e) => {
     e.preventDefault();
-    replaceBlanks(formData);
-    setName("");
-    setAnimal("");
-    setAdj("");
-    setVerb("");
+    replaceBlanks(formData, story, setStory);
+    setFormData(emtpyFormValues);
   };
 
   //   let replacementObj = {
@@ -46,24 +39,8 @@ export default function Form() {
   //   };
 
   // replacing all the values(refactor with cleaner function? ) and set new ones in state
-  function replaceBlanks({ name, animal, adj, verb }) {
-    let newStory = story
-      .replaceAll("[Name]", name)
-      .replaceAll("[Animal]", animal)
-      .replaceAll("[Adjective]", adj)
-      .replaceAll("[Verbing]", verb);
-    let newTitle = title
-      .replaceAll("[Name]", name)
-      .replaceAll("[Animal]", animal)
-      .replaceAll("[Adjective]", adj)
-      .replaceAll("[Verbing]", verb);
-    setStory(newStory);
-    setTitle(newTitle);
-  }
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(name, value);
     setFormData((fData) => ({ ...fData, [name]: value }));
   };
 
@@ -112,8 +89,12 @@ export default function Form() {
         </form>
       </div>
 
-      {story.includes("[") === false && ( // only if the blanks are replaced by input values, render
-        <Story story={story} title={title} handleNewRound={handleNewRound} />
+      {story.story.includes("[") === false && ( // only if the blanks are replaced by input values, render
+        <Story
+          story={story.story}
+          title={story.title}
+          handleNewRound={handleNewRound}
+        />
       )}
     </div>
   );
