@@ -64,7 +64,7 @@ p {
   -webkit-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
   -moz-box-shadow: 4px 0px 20px -1px rgba(31, 13, 13, 0.46);
   width: 600px;
- background-color: #d9f55e;
+ background-color:rgb(68, 200, 86);
   margin: 60px;
  
 }
@@ -100,7 +100,7 @@ input {
  
 }
 
-.restart-btn {
+button {
   all: unset;
   color: rgb(255, 255, 255);
   margin-top: 2.4em;
@@ -116,19 +116,8 @@ input {
 }
 
 .get-btn{
- 
-  color: rgb(255, 255, 255);
- border: rgb(0, 0, 0) 0.5px solid;
-  margin-top: 2.4em;
-  background: rgb(93, 94, 75);
-  font-size: 16px;
-  padding: 1em 4em;
-  border-radius: 50px;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 550;
-  position: relative;
-
+  color: black;
+  border: 1px solid black;
 }
 
 .story-box {

@@ -34,7 +34,7 @@ export default function Form() {
   };
 
   //   let replacementObj = {
-  //     wild: name,
+  //     [Name]: name,
   //     "[Animal]": animal,
   //     "[Adjective]": adj,
   //     "[Verbing]": verb,
